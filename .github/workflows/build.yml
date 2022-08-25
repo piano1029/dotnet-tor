@@ -61,7 +61,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: 🙏 build
-        run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
+        run: dotnet build -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER" --configuration release
 
       - name: ⚙ GNU grep
         if: matrix.os == 'macOS-latest'
@@ -74,12 +74,6 @@ jobs:
 
       - name: 📦 pack
         run: dotnet pack -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
-
-      # Only push CI package to sleet feed if building on ubuntu (fastest)
-      - name: 🚀 sleet
-        env:
-          SLEET_CONNECTION: ${{ secrets.SLEET_CONNECTION }}
-        if: matrix.os == 'ubuntu-latest' && env.SLEET_CONNECTION != ''
-        run: |
-          dotnet tool install -g --version 4.0.18 sleet 
-          sleet push bin --config none -f --verbose -p "SLEET_FEED_CONTAINER=nuget" -p "SLEET_FEED_CONNECTIONSTRING=${{ secrets.SLEET_CONNECTION }}" -p "SLEET_FEED_TYPE=azure" || echo "No packages found"
+        
+      - name: test2
+        run: pwd
