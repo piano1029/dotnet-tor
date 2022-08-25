@@ -75,5 +75,8 @@ jobs:
       - name: 📦 pack
         run: dotnet pack -m:1 -p:VersionLabel="$GITHUB_REF.$GITHUB_RUN_NUMBER"
         
-      - name: test2
-        run: pwd
+      - name: 📤 Upload Artifacts
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: Build Folders
+          path: src/dotnet-tor/bin
