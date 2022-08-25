@@ -1,4 +1,4 @@
-﻿# Builds and runs tests in all three supported OSes
+# Builds and runs tests in all three supported OSes
 # Pushes CI feed if secrets.SLEET_CONNECTION is provided
 
 name: build
@@ -78,5 +78,5 @@ jobs:
       - name: 📤 Upload Artifacts
         uses: actions/upload-artifact@v3.1.0
         with:
-          name: Build Folders
+          name: Build Folders ${{ matrix.os }} 
           path: src/dotnet-tor/bin
